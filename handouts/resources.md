@@ -1,4 +1,4 @@
-# Resources — Notre Dame Watch-Along Take-Home
+# Resources — Watch-Along Take-Home
 
 A consolidated list of every external link from the talk plus a few that didn't fit on slides. Print, save, or fork; the deck embeds these but this file is your reference card.
 
@@ -53,11 +53,11 @@ These are the source of truth. If a claim in the talk seemed surprising, check t
 - **[`karpathy/autoresearch`](https://github.com/karpathy/autoresearch)** — Andrej Karpathy's constraint-based autonomous-research experiment. Aspirational; different shape than ours.
 - **[`EveryInc/compound-engineering-plugin`](https://github.com/EveryInc/compound-engineering-plugin)** — Every Inc.'s "Compound Engineering" plugin (works in Claude Code, Codex, Cursor, Copilot). 36 skills + 51 agents organized around an `ideate → brainstorm → plan → work` loop. **A kindred-spirit project to our orchestrator pattern** — different framing, similar discipline. Worth browsing if you like ours.
 
-### B-school / MBA-specific
+### Applied curriculum + tutorials
 
-- **[AI MBA](https://ai-mba.io)** — Curriculum + tutorials targeting business-school audiences. Specific recommendations:
+- **[AI MBA](https://ai-mba.io)** — Curriculum and tutorial collection. Specific recommendations:
   - **[Skills vs MCPs tutorial](https://ai-mba.io/tutorials/skills-vs-mcps)** — Direct follow-up to Part 3.
-  - [Example curriculum (PDF)](https://ai-mba.io/example-curriculum.pdf) — Course-design reference for faculty teaching AI in B-school programs.
+  - [Example curriculum (PDF)](https://ai-mba.io/example-curriculum.pdf) — Course-design reference for faculty teaching agentic AI.
 
 ---
 
@@ -83,7 +83,7 @@ These are the source of truth. If a claim in the talk seemed surprising, check t
 - **[Quarterly Journal of Economics replication policy](https://academic.oup.com/qje/pages/general_instructions)** — QJE follows the AEA Code policy.
 - **[Journal of Political Economy replication policy](https://www.journals.uchicago.edu/journals/jpe/replication-policy)** — JPE's policy.
 
-For finance + accounting journal policies, refer to the journals' own author-instruction pages directly — those policies are evolving rapidly.
+For field-specific journal policies beyond those listed above, refer to the journals' own author-instruction pages directly — those policies are evolving rapidly.
 
 ---
 

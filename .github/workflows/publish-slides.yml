@@ -41,7 +41,7 @@ jobs:
 
       - name: Render Quarto deck
         working-directory: Quarto
-        run: quarto render notre-dame-claude-mini.qmd
+        run: quarto render claude-mini.qmd
 
       - name: Stage site
         run: |
@@ -56,9 +56,9 @@ jobs:
           cat > _site/index.html <<'EOF'
           <!doctype html>
           <meta charset="utf-8">
-          <meta http-equiv="refresh" content="0; url=Quarto/notre-dame-claude-mini.html">
-          <title>Claude-Mini — Notre Dame Watch-Along</title>
-          <p><a href="Quarto/notre-dame-claude-mini.html">Open the slides &rarr;</a></p>
+          <meta http-equiv="refresh" content="0; url=Quarto/claude-mini.html">
+          <title>Claude-Mini — Watch-Along Seminar</title>
+          <p><a href="Quarto/claude-mini.html">Open the slides &rarr;</a></p>
           EOF
 
       - uses: actions/upload-pages-artifact@v3

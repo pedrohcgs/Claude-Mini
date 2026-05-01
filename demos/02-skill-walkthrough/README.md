@@ -1,6 +1,6 @@
 # Demo 02 — Skill walkthrough: `/preregister`
 
-**Part of:** Notre Dame Watch-Along, Part 3 (~10 min walkthrough, embedded in 30-min Part)
+**Part of:** Watch-Along Seminar, Part 3 (~10 min walkthrough, embedded in 30-min Part)
 **Status:** Choreography drafted. **No video fallback** — low-risk demo (opens a file + invokes a skill on a fake input).
 
 ---
@@ -89,5 +89,5 @@ Pedro opens the generated file. Reads aloud field 2 (hypothesis) and field 5 (an
 
 - `/preregister` has the cleanest input → output flow (3 min end-to-end)
 - The 3-style branching (OSF / AsPredicted / AEA RCT) shows domain awareness
-- Pre-registration culture is rising in finance/accounting → audience-relevant
+- Pre-registration culture is rising across applied empirical fields → audience-relevant
 - The MUST/SHOULD/MAY annotation discipline ports to the audience's actual writing

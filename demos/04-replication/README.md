@@ -1,6 +1,6 @@
-# Demo 04 — Replication audit (HEADLINE for finance/accounting)
+# Demo 04 — Replication audit (HEADLINE)
 
-**Part of:** Notre Dame Watch-Along, Part 5 (~15 min live)
+**Part of:** Watch-Along Seminar, Part 5 (~15 min live)
 **Status:** Choreography drafted. **No video fallback** — verbal narration over `expected-*.md` if the live demo aborts (see Fallback strategy below).
 
 ---
@@ -9,10 +9,10 @@
 
 Show `/audit-reproducibility` finding a **real, planted numerical discrepancy** between a manuscript's numerical claims and the R script that produced them.
 
-This is the headline demo for finance + accounting. The audience leaves understanding that:
+This is the headline demo for empirical replication. The audience leaves understanding that:
 
 1. AEA Data Editors do this for every accepted paper.
-2. JF / JAR / TAR are moving the same way.
+2. Top journals across applied empirical fields are moving the same way.
 3. Doing it before submission saves you a months-long fix-it cycle in public.
 
 ---

@@ -1,37 +1,46 @@
-# CLAUDE.MD — Claude-Mini
+# Claude-Mini
 
-**Project:** Notre Dame faculty seminar — agentic AI for academic research
-**Author:** Pedro H. C. Sant'Anna (Emory University)
-**Audience:** Faculty in economics, finance, and accounting
-**Format:** 4-hour watch-along
+@README.md
 
----
-
-## Core Principles
-
-- **Plan first.** Enter plan mode before non-trivial work; save plans to `quality_reports/plans/`.
-- **Verify after.** Compile/render and confirm output at the end of every task.
-- **Quality over completeness.** A 30-slide section that lands beats a 50-slide section that drags.
-- **The deck is one file.** `Quarto/notre-dame-claude-mini.qmd` — single .qmd, single source of truth.
-
-This repo is the **teaching distillation** of `claude-code-my-workflow`. Skills referenced here live in BOTH places (copies in `.claude/skills/` for demo invocation; canonical sources in the parent repo).
+<!-- Maintainer notes (stripped before injection per code.claude.com/docs/en/memory):
+     - Length budget: keep under 200 lines per Anthropic's published guidance.
+       Adherence drops past 200 — see code.claude.com/docs/en/memory.
+     - Add a line when: Claude makes the same mistake twice, OR you re-type the
+       same correction across sessions, OR a new collaborator would need it.
+     - Delete a line when: comment it out, restart Claude — if behavior is
+       unchanged, delete.
+     - Push topic-scoped detail to .claude/rules/<topic>.md with `paths:` YAML
+       frontmatter so it loads only when matching files are touched.
+       Imports (@path) DO NOT save context — they expand at launch. -->
 
 ---
 
-## Folder Structure
+## Working principles
 
-```
+- **Plan first.** Enter plan mode (`Shift+Tab`) before any non-trivial change. Save approved plans to `quality_reports/plans/YYYY-MM-DD_description.md`.
+- **Verify after.** End every task by re-rendering the deck and confirming the HTML opens cleanly.
+- **The deck is one file.** `Quarto/claude-mini.qmd` is the single source of truth — every other artifact derives from it.
+- **YOU MUST NOT** `git pull` updates from the parent template (`claude-code-my-workflow`) during the week of the talk. Pin the version.
+
+---
+
+## Repository layout
+
+```text
 Claude-Mini/
 ├── Quarto/
-│   ├── notre-dame-claude-mini.qmd    # The 4-hour deck
+│   ├── claude-mini.qmd               # The 4-hour deck (only source you edit)
+│   ├── claude-mini.html              # Derived — DO NOT hand-edit
 │   ├── _quarto.yml                   # Project config
-│   └── claude-mini.scss              # Theme — Emory base + Anthropic-orange accent
+│   ├── claude-mini.scss              # Theme (Emory blue + Anthropic orange)
+│   └── mathjax-config.js             # MathJax 4 numbering + macros
 ├── Figures/                          # Logos + custom diagrams (SVGs)
-├── demos/                            # 6 pre-staged demo bundles (one per part)
+├── demos/                            # 6 pre-staged demo bundles
 ├── exercises/                        # Part 3 hands-on handouts
 ├── handouts/                         # Take-home PDFs
 ├── speaker-notes/                    # Slide script, demo choreography, pre-flight
-└── .claude/skills/                   # Demo-only skills (subset of parent repo)
+├── quality_reports/{plans,session_logs}/
+└── .claude/                          # Rules, skills, agents
 ```
 
 ---
@@ -39,48 +48,53 @@ Claude-Mini/
 ## Commands
 
 ```bash
-# Render the deck to HTML
-cd Quarto && quarto render notre-dame-claude-mini.qmd
+# Render the deck
+cd Quarto && quarto render claude-mini.qmd
 
-# Preview live (auto-reload on save)
-cd Quarto && quarto preview notre-dame-claude-mini.qmd
+# Live preview (auto-reload on save)
+cd Quarto && quarto preview claude-mini.qmd
 
-# Open the latest render
-open Quarto/notre-dame-claude-mini.html
+# Open the latest render in a fresh window with cache-bust (macOS)
+open -na "Google Chrome" --args --new-window \
+  "file://$(pwd)/claude-mini.html?v=$(date +%s)"
 ```
-
-**Visual identity contract:**
-The theme `Quarto/claude-mini.scss` is derived from Pedro's Econ 730 deck. Two section-divider color variants are available:
-- `# Title {.emoryblue}` — for substance / case-study sections (Parts 2, 5, 6)
-- `# Title {.claudeorange}` — for sections about the agent itself (Parts 1, 4, 7)
 
 ---
 
-## Quality Thresholds (advisory)
+## Slide style — IMPORTANT
 
-| Threshold | Meaning |
-|-----------|---------|
-| 80 / 100  | Slide is ready to ship |
-| 90 / 100  | Slide is ready to teach |
-| 95 / 100  | Aspirational |
+These rules came from real overflow incidents during prep. Honor them:
 
-There is no automated `quality_score.py` for this repo (intentionally lean). Apply judgment.
+- **Bullet spacing:** `2em` global / `1.6em` `.compact`. Defined in `Quarto/claude-mini.scss`. **Don't dial down** — the user prefers generous rhythm.
+- **YOU MUST NOT use `.smaller` on prose slides.** 85% font is unreadable for the back row. If a slide overflows: split it, trim content, or convert closing paragraphs to bullets — never shrink.
+- **Section dividers:** `# Title {.emoryblue}` for substance (Parts 2, 5, 6); `# Title {.claudeorange}` for "about the agent itself" (Parts 1, 4, 7).
+- **Wide tables** must wrap in `::: {.wide-table}` — required because `.compact` constrains table width.
+- **No `::: {.incremental}` wrappers and no `. . .` pause markers.** The deck reveals everything at once — the watch-along format depends on it.
+- **Hard safety:** `.reveal .slides section { overflow: hidden; }` clips anything past 1600×900. If clipping happens, **fix the slide structurally** — don't rely on the clip.
+
+For deeper Quarto-specific patterns (overflow priority order, CSS class catalog, math gotchas), see `.claude/rules/quarto-slides.md` — it auto-loads when editing `.qmd` files via its `paths:` frontmatter.
 
 ---
 
 ## Live demo discipline
 
-Per the talk plan (`quality_reports/plans/piped-frolicking-turing.md` in the parent repo):
-
-- Every live demo has a **verbal fallback strategy** documented in its `demos/<demo-id>/README.md`, narrating over the bundled `expected-*.md` answer key (no video fallbacks, by design).
-- Every live demo has a **literal-commands script** at `demos/<demo-id>/README.md`.
-- Every live demo has an **abort trigger** documented at a specific time-mark — if not reached, play the recording.
-- Don't pull updates to `claude-code-my-workflow` during the week of the talk. Pin the version.
+- Every demo has a **verbal fallback** at `demos/<demo-id>/expected-*.md` — narrate over it. **No video fallbacks** by design.
+- Every demo has an **abort trigger** documented at a specific time-mark in `demos/<demo-id>/README.md`.
+- Per-demo literal commands live in `demos/<demo-id>/README.md`.
 
 ---
 
-## Cross-references
+## Common gotchas (Quarto/RevealJS)
 
-- Parent repo: [`claude-code-my-workflow`](https://github.com/pedrohcgs/claude-code-my-workflow) — full template (30 skills / 14 agents / 24 rules / 6 hooks).
-- Talk plan: `claude-code-academic-workflow/quality_reports/plans/piped-frolicking-turing.md`.
+- **PDF figures invisible in browsers.** Quarto renders `.pdf` image refs as `<embed>` which browsers can't display inline. **Always convert to SVG first** (`pdf2svg input.pdf output.svg`).
+- **Inline math boundary `2$\times$2`.** Pandoc merges adjacent `$` into display math. Use `$2 \times 2$` (single span) instead.
+- **Phantom slide bug.** A `## Title` followed immediately by `## Title` (one with content, one without) creates an empty visible slide. Section dividers should be `# Title` (single hash).
+- **Browser cache.** After re-rendering, open in a fresh Chrome window with `?v=$(date +%s)` query string — the deck's CSS files are content-hashed so stale tabs serve old layouts.
+
+---
+
+## Cross-references (stable links only)
+
+- Parent template: [`claude-code-my-workflow`](https://github.com/pedrohcgs/claude-code-my-workflow) — full 30 skills / 14 agents / 24 rules / 6 hooks.
 - Visual reference: [`Econ-730---Causal-Panel-Data`](https://github.com/pedrohcgs/Econ-730---Causal-Panel-Data) — source of `claude-mini.scss` derivation.
+- Talk plan: see parent repo's `quality_reports/plans/piped-frolicking-turing.md`.

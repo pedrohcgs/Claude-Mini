@@ -1,6 +1,6 @@
 # Demo 05 — Simulated peer review (HEADLINE — Part 6)
 
-**Part of:** Notre Dame Watch-Along, Part 6 (~28 min live across two demos)
+**Part of:** Watch-Along Seminar, Part 6 (~28 min live across two demos)
 **Status:** Choreography drafted. **No video fallback** — verbal narration over `expected-*.md` if the live demo aborts (see Fallback strategy below).
 
 ---

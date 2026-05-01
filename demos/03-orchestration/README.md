@@ -1,6 +1,6 @@
 # Demo 03 — Orchestration: critic-fixer loop + hook gate
 
-**Part of:** Notre Dame Watch-Along, Part 4 (~3 min live)
+**Part of:** Watch-Along Seminar, Part 4 (~3 min live)
 **Status:** Choreography drafted. **No video fallback** — verbal narration over `expected-*.md` if the live demo aborts (see Fallback strategy below).
 
 ---

@@ -1,6 +1,6 @@
 # Demo Skills
 
-This directory contains a curated subset of the skills used during the Notre Dame talk live demos. The **full set (30 skills) lives in [`claude-code-my-workflow`](https://github.com/pedrohcgs/claude-code-my-workflow) v1.8.0+**.
+This directory contains a curated subset of the skills used during the watch-along seminar's live demos. The **full set (30 skills) lives in [`claude-code-my-workflow`](https://github.com/pedrohcgs/claude-code-my-workflow) v1.8.0+**.
 
 ## Why curate?
 

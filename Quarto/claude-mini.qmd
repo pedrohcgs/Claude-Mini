@@ -1739,7 +1739,7 @@ These are *menu*, not assignments. Pick one when it's the right week.
 - **The `claude-code-my-workflow` guide:** [psantanna.com](https://psantanna.com/claude-code-my-workflow) — full walkthrough
 - **TROUBLESHOOTING.md** in the same repo — most issues catalogued
 - **Hugo Sant'Anna's `clo-author`:** [github.com/hugosantanna](https://github.com/hugosantanna/clo-author) — paper-authoring-focused fork
-- **AI MBA tutorials:** [ai-mba.io](https://ai-mba.io) — B-school audience materials
+- **AI MBA tutorials:** [ai-mba.io](https://ai-mba.io) — applied tutorials and curriculum
 - **Take-home `handouts/resources.md`** — every link from this talk in one file
 
 ## Thank you {.emoryblue}
@@ -1750,6 +1750,3 @@ These are *menu*, not assignments. Pick one when it's the right week.
 
 **Reach me:** pedro.santanna@emory.edu · [psantanna.com](https://psantanna.com) · [@pedrohcgs](https://github.com/pedrohcgs)
 
-**Q&A — let's talk.**
-
----

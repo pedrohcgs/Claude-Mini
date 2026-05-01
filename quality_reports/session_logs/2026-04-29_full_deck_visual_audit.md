@@ -1,8 +1,8 @@
-# Notre Dame Deck — Full Visual Audit (2026-04-29)
+# Claude-Mini Deck — Full Visual Audit (2026-04-29)
 
 **Auditor:** slide-auditor agent
-**Source:** `/Users/pcostag/Documents/GitHub/Claude-Mini/Quarto/notre-dame-claude-mini.qmd` (2,147 lines)
-**Render:** `/Users/pcostag/Documents/GitHub/Claude-Mini/Quarto/notre-dame-claude-mini.html` (3,091 lines, 160 `<section>` slides)
+**Source:** `/Users/pcostag/Documents/GitHub/Claude-Mini/Quarto/claude-mini.qmd` (2,147 lines)
+**Render:** `/Users/pcostag/Documents/GitHub/Claude-Mini/Quarto/claude-mini.html` (3,091 lines, 160 `<section>` slides)
 **SCSS:** `claude-mini.scss` + grantmcdermott `clean.scss`
 **Format:** RevealJS 1600x900, 5% margins (~750px usable vertical)
 **Scope:** HTML output only — there is no Beamer source for this deck.
@@ -41,7 +41,7 @@ Overall: this deck is in **strong shape**. No font-size overrides, no math gotch
 ## High-Severity Issues (must fix before teaching)
 
 ### Slide: "A workflow I keep coming back to: `/deep-audit`" — phantom slide
-- **Location:** `notre-dame-claude-mini.qmd` L1186
+- **Location:** `claude-mini.qmd` L1186
 - **Issue:** `## A workflow I keep coming back to: \`/deep-audit\` {.claudeorange}` — this was clearly intended as a `# ` section divider (the `.claudeorange` class is the project's section-divider convention), but is written with two `##`. The renderer produces `<section id="..." class="slide level2 claudeorange">` containing **only an `<h2>`** and nothing else. The next slide (L1188) is the actual content slide, also titled `## /deep-audit ...`. Result: when stepping through the deck live, the audience sees an *empty slide with just the orange-tinted title*, then the same title again with content.
 - **Severity:** **High**
 - **Recommended fix:** Change `##` to `#` at L1186 (and the line becomes `# A workflow I keep coming back to: \`/deep-audit\` {.claudeorange}`). This makes it a real section divider rendered with the gradient + centered h1 styling, consistent with sibling dividers (L985, L1031, L1085, L1124).

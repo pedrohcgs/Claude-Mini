@@ -1,6 +1,6 @@
 # Demo 06 — Cross-tool review (optional, Part 7)
 
-**Part of:** Notre Dame Watch-Along, Part 7 closing (~3 min, optional — runs only if time permits)
+**Part of:** Watch-Along Seminar, Part 7 closing (~3 min, optional — runs only if time permits)
 **Status:** Choreography drafted. Optional demo — skip if running short on Q&A time.
 
 ---

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="notre-dame-claude-mini_files/libs/clipboard/clipboard.min.js"></script>
-<script src="notre-dame-claude-mini_files/libs/quarto-html/tabby.min.js"></script>
-<script src="notre-dame-claude-mini_files/libs/quarto-html/popper.min.js"></script>
-<script src="notre-dame-claude-mini_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="notre-dame-claude-mini_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="notre-dame-claude-mini_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="notre-dame-claude-mini_files/libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="claude-mini_files/libs/clipboard/clipboard.min.js"></script>
+<script src="claude-mini_files/libs/quarto-html/tabby.min.js"></script>
+<script src="claude-mini_files/libs/quarto-html/popper.min.js"></script>
+<script src="claude-mini_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="claude-mini_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="claude-mini_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="claude-mini_files/libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.8.27">
 
   <meta name="author" content="Pedro H. C. Sant’Anna">
@@ -14,8 +14,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="notre-dame-claude-mini_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="notre-dame-claude-mini_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="claude-mini_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="claude-mini_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -95,13 +95,13 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="notre-dame-claude-mini_files/libs/revealjs/dist/theme/quarto-ddad9b7ed581f37d5fd61c6b84bd9408.css">
-  <link href="notre-dame-claude-mini_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="notre-dame-claude-mini_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="notre-dame-claude-mini_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="notre-dame-claude-mini_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="notre-dame-claude-mini_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-  <link href="notre-dame-claude-mini_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="claude-mini_files/libs/revealjs/dist/theme/quarto-ddad9b7ed581f37d5fd61c6b84bd9408.css">
+  <link href="claude-mini_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="claude-mini_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="claude-mini_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="claude-mini_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="claude-mini_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="claude-mini_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
@@ -2226,7 +2226,7 @@ clean.rds      ──by──&gt; scripts/R/02_clean.R
 <section id="why-use-more-than-one-ai-tool" class="slide level2 compact">
 <h2>Why use more than one AI tool</h2>
 <ul>
-<li><strong>No single tool is best at everything.</strong> Claude shines on repo-context tasks; Codex shines on focused-completion problems; Gemini on multimodal.</li>
+<li><strong>No single tool is best at everything.</strong> Claude shines on repo-context tasks; Codex shines on focused-completion problems.</li>
 <li><strong>A tool reviewing its own work has confirmation bias.</strong> A different tool, different training data, different failure modes — independent review.</li>
 <li><strong>Cost arbitrage.</strong> Cheap Haiku-class models for triage; Opus-class for the hard part; Codex for the tasks where it’s strictly better.</li>
 </ul>
@@ -2332,7 +2332,6 @@ clean.rds      ──by──&gt; scripts/R/02_clean.R
 <p><strong>Optional demo (~3 min)</strong></p>
 <p>Run <code>/codex:adversarial-review</code> on a small refactor.</p>
 <p>Audience watches: 1. Codex generates the refactor (already done, in the demo bundle) 2. Claude opens the diff fresh, reviews, surfaces 2-3 issues 3. Pedro narrates: “I’d have shipped this. Codex’s tool agreed with itself.”</p>
-<p>Skip if running short on Q&amp;A time.</p>
 <p>Choreography: <code>demos/06-cross-tool/README.md</code>.</p>
 </div>
 </section></section>
@@ -2345,14 +2344,11 @@ clean.rds      ──by──&gt; scripts/R/02_clean.R
 <h2>You’re not alone in this</h2>
 <p>Two complements I’d point you at first:</p>
 <ul>
-<li><strong><a href="https://bcf.princeton.edu/events/paul-goldsmith-pinkham-mini-series-on-claude-code-for-applied-economists/">Paul Goldsmith-Pinkham × Princeton</a></strong> — Yale finance prof, 5-episode video series for applied economists.
+<li><strong><a href="https://bcf.princeton.edu/events/paul-goldsmith-pinkham-mini-series-on-claude-code-for-applied-economists/">Paul Goldsmith-Pinkham × Princeton</a></strong> — Yale finance prof, multiple-episode video series for applied economists.
 <ul>
-<li><strong>Different format, different angle, longer form.</strong> Watch over a Saturday morning.</li>
+<li><strong>Different format, different angle.</strong></li>
 </ul></li>
-<li><strong><a href="https://claesbackman.com/claude-code-guide.html">Claes Bäckman’s written guide</a></strong> — ~3,500-word practical companion.
-<ul>
-<li>Covers: setup, R/Stata/Python/LaTeX, CLAUDE.md, skills, git, performance.</li>
-</ul></li>
+<li><strong><a href="https://claesbackman.com/claude-code-guide.html">Claes Bäckman’s written guide</a></strong> — ~3,500-word practical companion.</li>
 </ul>
 <p>Six more high-quality projects (clo-author, strategic-revision, crossref, claudeblattman, MixtapeTools, autoresearch, AI MBA) are in <code>handouts/resources.md</code> — won’t fit on a slide; will fit on your reference card.</p>
 </section>
@@ -2428,21 +2424,17 @@ clean.rds      ──by──&gt; scripts/R/02_clean.R
 <li><strong>The <code>claude-code-my-workflow</code> guide:</strong> <a href="https://psantanna.com/claude-code-my-workflow">psantanna.com</a> — full walkthrough</li>
 <li><strong>TROUBLESHOOTING.md</strong> in the same repo — most issues catalogued</li>
 <li><strong>Hugo Sant’Anna’s <code>clo-author</code>:</strong> <a href="https://github.com/hugosantanna/clo-author">github.com/hugosantanna</a> — paper-authoring-focused fork</li>
-<li><strong>AI MBA tutorials:</strong> <a href="https://ai-mba.io">ai-mba.io</a> — B-school audience materials</li>
+<li><strong>AI MBA tutorials:</strong> <a href="https://ai-mba.io">ai-mba.io</a> — applied tutorials and curriculum</li>
 <li><strong>Take-home <code>handouts/resources.md</code></strong> — every link from this talk in one file</li>
 </ul>
 </section>
 <section id="thank-you" class="slide level2 emoryblue">
 <h2>Thank you</h2>
 <blockquote>
-<p>Thanks for spending four hours of your day with me. I’d genuinely love to hear what works for you.</p>
+<p>Thanks for spending your day with me. I’d genuinely love to hear what works for you.</p>
 </blockquote>
 <p><strong>Materials:</strong> <a href="https://github.com/pedrohcgs/Claude-Mini">github.com/pedrohcgs/Claude-Mini</a></p>
 <p><strong>Reach me:</strong> pedro.santanna@emory.edu · <a href="https://psantanna.com">psantanna.com</a> · <a href="https://github.com/pedrohcgs"><span class="citation" data-cites="pedrohcgs">@pedrohcgs</span></a></p>
-<p><strong>Q&amp;A — let’s talk.</strong></p>
-</section>
-<section class="slide level2">
-
 
 </section></section>
     </div>
@@ -2454,20 +2446,20 @@ clean.rds      ──by──&gt; scripts/R/02_clean.R
 </div></div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="notre-dame-claude-mini_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="claude-mini_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="notre-dame-claude-mini_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="notre-dame-claude-mini_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="notre-dame-claude-mini_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="notre-dame-claude-mini_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="notre-dame-claude-mini_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="notre-dame-claude-mini_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="claude-mini_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="claude-mini_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="claude-mini_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="claude-mini_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="claude-mini_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="claude-mini_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="notre-dame-claude-mini_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="notre-dame-claude-mini_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="notre-dame-claude-mini_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="notre-dame-claude-mini_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="claude-mini_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="claude-mini_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="claude-mini_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="claude-mini_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>

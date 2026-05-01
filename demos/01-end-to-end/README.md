@@ -1,6 +1,6 @@
 # Demo 01 — End-to-End: improve a manuscript section
 
-**Part of:** Notre Dame Watch-Along, Part 2 (30 min total; demo runs ~25 min)
+**Part of:** Watch-Along Seminar, Part 2 (30 min total; demo runs ~25 min)
 **Status:** Choreography drafted. **No video fallback** — verbal narration over `expected-*.md` if the live demo aborts (see Fallback strategy below).
 
 ---
@@ -43,7 +43,7 @@ claude
 
 Pedro pastes:
 
-> *I want to improve the introduction in `master_supporting_docs/notre-dame-demo/manuscript-section.tex`. Enter plan mode and propose specific edits — do not make any edits without approval. Focus on: clarity, citation accuracy, missing covariate mentions. Keep the tone academic and the length close to current.*
+> *I want to improve the introduction in `master_supporting_docs/seminar-demo/manuscript-section.tex`. Enter plan mode and propose specific edits — do not make any edits without approval. Focus on: clarity, citation accuracy, missing covariate mentions. Keep the tone academic and the length close to current.*
 
 ### T+1 to T+3 — Plan mode
 

@@ -1,17 +1,16 @@
 # Claude-Mini
 
-> A 4-hour watch-along seminar for business-school faculty on agentic AI for academic research. Companion repo to [`claude-code-my-workflow`](https://github.com/pedrohcgs/claude-code-my-workflow).
+> A 4-hour watch-along seminar on agentic AI for academic research. Companion repo to [`claude-code-my-workflow`](https://github.com/pedrohcgs/claude-code-my-workflow).
 
-**Talk:** Notre Dame Mendoza College of Business
-**Audience:** Faculty in economics, finance, and accounting (examples drawn from applied causal-inference / panel-data econometrics)
+**Audience:** Academic researchers in applied empirical fields (examples drawn from applied causal-inference / panel-data econometrics)
 **Date:** Spring 2026
-**Format:** Watch-along — Pedro demonstrates live; faculty observe. No participant install required to follow.
+**Format:** Watch-along — Pedro demonstrates live; the audience observes. No participant install required to follow.
 
 ---
 
 ## What this repo contains
 
-- **[`Quarto/notre-dame-claude-mini.qmd`](Quarto/notre-dame-claude-mini.qmd)** — the 4-hour Quarto RevealJS lecture deck.
+- **[`Quarto/claude-mini.qmd`](Quarto/claude-mini.qmd)** — the 4-hour Quarto RevealJS lecture deck.
 - **[`demos/`](demos/)** — six pre-staged demo bundles (one per part that has a live demo). Each contains a `README.md` with literal commands, the source material, an `expected-*.md` answer key, and a verbal-fallback strategy if the live demo aborts.
 - **[`exercises/`](exercises/)** — printable handouts for the Part 3 hands-on skill-design exercise.
 - **[`handouts/`](handouts/)** — take-home PDFs (one-page summary, starter guide, resources).
@@ -25,7 +24,7 @@
 | 2 | End-to-end demo: improve a manuscript section | 30 min | ✅ Headliner #1 |
 | 3 | Building reusable skills (paper exercise) | 30 min | Walk-through, no live agent |
 | 4 | Orchestration + multi-agent systems | 25 min | Mini-demo |
-| 5 | Research + replication | 45 min | ✅ Headliner #2 (finance/accounting focus) |
+| 5 | Research + replication | 45 min | ✅ Headliner #2 |
 | 6 | Writing, refereeing, review simulation | 45 min | ✅ Headliner #3 |
 | 7 | Closing + cross-tool strategies | 25 min | None |
 
@@ -38,8 +37,8 @@ If you want the slides locally to follow along:
 ```bash
 git clone https://github.com/pedrohcgs/Claude-Mini.git
 cd Claude-Mini/Quarto
-quarto render notre-dame-claude-mini.qmd
-open notre-dame-claude-mini.html
+quarto render claude-mini.qmd
+open claude-mini.html
 ```
 
 To replay any of the live demos yourself, you'll need the parent template:
