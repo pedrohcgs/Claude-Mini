@@ -506,6 +506,54 @@ Pedro H. C. Sant’Anna
 <p>The next four parts walk through these. Today’s talk in one sentence: <strong>a workflow is the pattern that connects them.</strong></p>
 </section></section>
 <section>
+<section id="how-claude-reads-input" class="title-slide slide level1 claudeorange center">
+<h1>How Claude reads input</h1>
+
+</section>
+<section id="markdown-is-claudes-native-format" class="slide level2 compact">
+<h2>Markdown is Claude’s native format</h2>
+<p>Claude’s training corpus is <strong>dense in markdown</strong> — documentation, GitHub, Stack Overflow, technical blogs. Claude reads headers, code blocks, lists, and tables natively.</p>
+<p>What this means in practice:</p>
+<ul>
+<li>✅ <strong>Markdown:</strong> highest signal-to-noise. Claude reads it the way you read it.</li>
+<li>🟡 <strong>PDF (via vision):</strong> works, but you pay 2–3× the tokens for layout artifacts (page breaks, fonts, columns) that don’t carry meaning.</li>
+<li>🟡 <strong>DOCX / PPTX:</strong> XML noise. Convert first.</li>
+<li>🔴 <strong>Scanned-only PDF:</strong> OCR layer is extra dependency; accuracy drops.</li>
+</ul>
+<blockquote>
+<p><strong>Rule of thumb:</strong> PDF → markdown saves <strong>50–70%</strong> of tokens. Same content, less noise.</p>
+</blockquote>
+</section>
+<section id="convert-pdfs-first-two-tools" class="slide level2 compact">
+<h2>Convert PDFs first — two tools</h2>
+<div class="wide-table">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Tool</th>
+<th>Strength</th>
+<th>Use when</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://github.com/microsoft/markitdown"><code>microsoft/markitdown</code></a></td>
+<td>Swiss-army knife: PDF, DOCX, XLSX, PPTX, HTML, EPUB. One-line CLI.</td>
+<td>First choice — covers ~90% of cases.</td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/opendataloader-project/opendataloader-pdf"><code>opendataloader-pdf</code></a></td>
+<td>PDF specialist. XY-cut++ reading order, bounding boxes, 0.907 benchmark accuracy.</td>
+<td>Multi-column papers, dense tables, math-heavy PDFs.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href=""></a><span class="ex">markitdown</span> paper.pdf <span class="op">&gt;</span> paper.md           <span class="co"># 90% of cases</span></span>
+<span id="cb1-2"><a href=""></a><span class="ex">opendataloader</span> paper.pdf <span class="at">-o</span> paper.md      <span class="co"># complex layouts</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Workflow:</strong> convert PDFs as soon as they enter the project. Feed Claude the <code>.md</code>; let the original sit in <code>master_supporting_docs/</code>. There’s a <code>/pdf-to-md</code> skill in this repo that wraps both tools.</p>
+</section></section>
+<section>
 <section id="claude.md-as-control-center" class="title-slide slide level1 claudeorange center">
 <h1>CLAUDE.md as control center</h1>
 
@@ -519,20 +567,20 @@ Pedro H. C. Sant’Anna
 </section>
 <section id="whats-in-mine" class="slide level2 compact">
 <h2>What’s in mine</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href=""></a><span class="fu"># CLAUDE.MD — Causal Panel Data Course</span></span>
-<span id="cb1-2"><a href=""></a></span>
-<span id="cb1-3"><a href=""></a><span class="fu">## Core Principles</span></span>
-<span id="cb1-4"><a href=""></a><span class="ss">- </span>Plan first; verify after.</span>
-<span id="cb1-5"><a href=""></a><span class="ss">- </span>Quality gates: nothing ships below 80/100.</span>
-<span id="cb1-6"><a href=""></a></span>
-<span id="cb1-7"><a href=""></a><span class="fu">## Folder Structure</span></span>
-<span id="cb1-8"><a href=""></a><span class="ss">- </span>Slides/ — Beamer .tex</span>
-<span id="cb1-9"><a href=""></a><span class="ss">- </span>scripts/R/ — analysis pipeline</span>
-<span id="cb1-10"><a href=""></a></span>
-<span id="cb1-11"><a href=""></a><span class="fu">## Commands</span></span>
-<span id="cb1-12"><a href=""></a>TEXINPUTS=../Preambles:$TEXINPUTS \</span>
-<span id="cb1-13"><a href=""></a>  xelatex -interaction=nonstopmode file.tex</span>
-<span id="cb1-14"><a href=""></a>quarto render file.qmd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href=""></a><span class="fu"># CLAUDE.MD — Causal Panel Data Course</span></span>
+<span id="cb2-2"><a href=""></a></span>
+<span id="cb2-3"><a href=""></a><span class="fu">## Core Principles</span></span>
+<span id="cb2-4"><a href=""></a><span class="ss">- </span>Plan first; verify after.</span>
+<span id="cb2-5"><a href=""></a><span class="ss">- </span>Quality gates: nothing ships below 80/100.</span>
+<span id="cb2-6"><a href=""></a></span>
+<span id="cb2-7"><a href=""></a><span class="fu">## Folder Structure</span></span>
+<span id="cb2-8"><a href=""></a><span class="ss">- </span>Slides/ — Beamer .tex</span>
+<span id="cb2-9"><a href=""></a><span class="ss">- </span>scripts/R/ — analysis pipeline</span>
+<span id="cb2-10"><a href=""></a></span>
+<span id="cb2-11"><a href=""></a><span class="fu">## Commands</span></span>
+<span id="cb2-12"><a href=""></a>TEXINPUTS=../Preambles:$TEXINPUTS \</span>
+<span id="cb2-13"><a href=""></a>  xelatex -interaction=nonstopmode file.tex</span>
+<span id="cb2-14"><a href=""></a>quarto render file.qmd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>I’ll open the actual file in a moment.</p>
 </section>
 <section id="what-that-gives-claude" class="slide level2 compact">
@@ -641,47 +689,47 @@ Pedro H. C. Sant’Anna
 </section>
 <section id="an-applied-causal-example-your-claude.md-draft-1" class="slide level2 compact">
 <h2>An applied-causal example (your CLAUDE.md, draft 1)</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href=""></a><span class="fu"># CLAUDE.MD — DiD on Medicaid Expansion</span></span>
-<span id="cb2-2"><a href=""></a></span>
-<span id="cb2-3"><a href=""></a><span class="fu">## Core Principles</span></span>
-<span id="cb2-4"><a href=""></a><span class="ss">- </span>Default journal: AER.</span>
-<span id="cb2-5"><a href=""></a><span class="ss">- </span>Replication policy: AEA Data and Code Availability Policy.</span>
-<span id="cb2-6"><a href=""></a><span class="ss">- </span>Identification: staggered DiD with never-treated comparison.</span>
-<span id="cb2-7"><a href=""></a><span class="ss">- </span>Estimator: Callaway-Sant'Anna (2021) ATT(g,t) — primary; TWFE robustness.</span>
-<span id="cb2-8"><a href=""></a><span class="ss">- </span>Standard errors: clustered at state level (treatment unit).</span>
-<span id="cb2-9"><a href=""></a></span>
-<span id="cb2-10"><a href=""></a><span class="fu">## Data Sources</span></span>
-<span id="cb2-11"><a href=""></a><span class="ss">- </span>ASEC monthly CPS, 2008-2022</span>
-<span id="cb2-12"><a href=""></a><span class="ss">- </span>State Medicaid expansion dates from KFF</span>
-<span id="cb2-13"><a href=""></a><span class="ss">- </span>Sample restrictions: 18-64, non-disabled, household head.</span>
-<span id="cb2-14"><a href=""></a></span>
-<span id="cb2-15"><a href=""></a><span class="fu">## Commands</span></span>
-<span id="cb2-16"><a href=""></a><span class="ss">- </span>Cleaning: Rscript scripts/02_clean.R</span>
-<span id="cb2-17"><a href=""></a><span class="ss">- </span>Estimation: Rscript scripts/03_main_did.R</span>
-<span id="cb2-18"><a href=""></a><span class="ss">- </span>Pre-trends test: Rscript scripts/04_pretrends.R (Roth 2022, Rambachan-Roth 2023)</span>
-<span id="cb2-19"><a href=""></a><span class="ss">- </span>Replication audit: /audit-reproducibility paper.tex scripts/</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href=""></a><span class="fu"># CLAUDE.MD — DiD on Medicaid Expansion</span></span>
+<span id="cb3-2"><a href=""></a></span>
+<span id="cb3-3"><a href=""></a><span class="fu">## Core Principles</span></span>
+<span id="cb3-4"><a href=""></a><span class="ss">- </span>Default journal: AER.</span>
+<span id="cb3-5"><a href=""></a><span class="ss">- </span>Replication policy: AEA Data and Code Availability Policy.</span>
+<span id="cb3-6"><a href=""></a><span class="ss">- </span>Identification: staggered DiD with never-treated comparison.</span>
+<span id="cb3-7"><a href=""></a><span class="ss">- </span>Estimator: Callaway-Sant'Anna (2021) ATT(g,t) — primary; TWFE robustness.</span>
+<span id="cb3-8"><a href=""></a><span class="ss">- </span>Standard errors: clustered at state level (treatment unit).</span>
+<span id="cb3-9"><a href=""></a></span>
+<span id="cb3-10"><a href=""></a><span class="fu">## Data Sources</span></span>
+<span id="cb3-11"><a href=""></a><span class="ss">- </span>ASEC monthly CPS, 2008-2022</span>
+<span id="cb3-12"><a href=""></a><span class="ss">- </span>State Medicaid expansion dates from KFF</span>
+<span id="cb3-13"><a href=""></a><span class="ss">- </span>Sample restrictions: 18-64, non-disabled, household head.</span>
+<span id="cb3-14"><a href=""></a></span>
+<span id="cb3-15"><a href=""></a><span class="fu">## Commands</span></span>
+<span id="cb3-16"><a href=""></a><span class="ss">- </span>Cleaning: Rscript scripts/02_clean.R</span>
+<span id="cb3-17"><a href=""></a><span class="ss">- </span>Estimation: Rscript scripts/03_main_did.R</span>
+<span id="cb3-18"><a href=""></a><span class="ss">- </span>Pre-trends test: Rscript scripts/04_pretrends.R (Roth 2022, Rambachan-Roth 2023)</span>
+<span id="cb3-19"><a href=""></a><span class="ss">- </span>Replication audit: /audit-reproducibility paper.tex scripts/</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>That’s enough. Stop there.</p>
 </section>
 <section id="a-causal-rr-example-your-claude.md-draft-2" class="slide level2 compact">
 <h2>A causal R&amp;R example (your CLAUDE.md, draft 2)</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href=""></a><span class="fu"># CLAUDE.MD — QJE R&amp;R Round 2</span></span>
-<span id="cb3-2"><a href=""></a></span>
-<span id="cb3-3"><a href=""></a><span class="fu">## Core Principles</span></span>
-<span id="cb3-4"><a href=""></a><span class="ss">- </span>Target: QJE R&amp;R round 2.</span>
-<span id="cb3-5"><a href=""></a><span class="ss">- </span>Referee 1: alternative parallel-trends tests (Roth 2022 + Rambachan-Roth 2023 sensitivity).</span>
-<span id="cb3-6"><a href=""></a><span class="ss">- </span>Referee 2: placebo tests using never-treated states only.</span>
-<span id="cb3-7"><a href=""></a><span class="ss">- </span>Referee 3: treatment-effect heterogeneity by state-level covariates.</span>
-<span id="cb3-8"><a href=""></a></span>
-<span id="cb3-9"><a href=""></a><span class="fu">## Data</span></span>
-<span id="cb3-10"><a href=""></a><span class="ss">- </span>State-year panel, 2000-2022</span>
-<span id="cb3-11"><a href=""></a><span class="ss">- </span>Treatment dates: KFF + manual cross-check</span>
-<span id="cb3-12"><a href=""></a><span class="ss">- </span>Outcomes: small-business formation (Census BFS), labor-force participation (CPS)</span>
-<span id="cb3-13"><a href=""></a></span>
-<span id="cb3-14"><a href=""></a><span class="fu">## Workflow</span></span>
-<span id="cb3-15"><a href=""></a><span class="ss">- </span>New analyses go to scripts/r2_response/ (NOT main scripts/).</span>
-<span id="cb3-16"><a href=""></a><span class="ss">- </span>Each analysis: ONE script that writes ONE table to tables/r2/.</span>
-<span id="cb3-17"><a href=""></a><span class="ss">- </span>Update response-letter.tex with mapping: analysis script -&gt; referee point.</span>
-<span id="cb3-18"><a href=""></a><span class="ss">- </span>/respond-to-referees on this round's editor letter when ready.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href=""></a><span class="fu"># CLAUDE.MD — QJE R&amp;R Round 2</span></span>
+<span id="cb4-2"><a href=""></a></span>
+<span id="cb4-3"><a href=""></a><span class="fu">## Core Principles</span></span>
+<span id="cb4-4"><a href=""></a><span class="ss">- </span>Target: QJE R&amp;R round 2.</span>
+<span id="cb4-5"><a href=""></a><span class="ss">- </span>Referee 1: alternative parallel-trends tests (Roth 2022 + Rambachan-Roth 2023 sensitivity).</span>
+<span id="cb4-6"><a href=""></a><span class="ss">- </span>Referee 2: placebo tests using never-treated states only.</span>
+<span id="cb4-7"><a href=""></a><span class="ss">- </span>Referee 3: treatment-effect heterogeneity by state-level covariates.</span>
+<span id="cb4-8"><a href=""></a></span>
+<span id="cb4-9"><a href=""></a><span class="fu">## Data</span></span>
+<span id="cb4-10"><a href=""></a><span class="ss">- </span>State-year panel, 2000-2022</span>
+<span id="cb4-11"><a href=""></a><span class="ss">- </span>Treatment dates: KFF + manual cross-check</span>
+<span id="cb4-12"><a href=""></a><span class="ss">- </span>Outcomes: small-business formation (Census BFS), labor-force participation (CPS)</span>
+<span id="cb4-13"><a href=""></a></span>
+<span id="cb4-14"><a href=""></a><span class="fu">## Workflow</span></span>
+<span id="cb4-15"><a href=""></a><span class="ss">- </span>New analyses go to scripts/r2_response/ (NOT main scripts/).</span>
+<span id="cb4-16"><a href=""></a><span class="ss">- </span>Each analysis: ONE script that writes ONE table to tables/r2/.</span>
+<span id="cb4-17"><a href=""></a><span class="ss">- </span>Update response-letter.tex with mapping: analysis script -&gt; referee point.</span>
+<span id="cb4-18"><a href=""></a><span class="ss">- </span>/respond-to-referees on this round's editor letter when ready.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="length-budget" class="slide level2 compact">
 <h2>Length budget</h2>
@@ -730,19 +778,19 @@ Pedro H. C. Sant’Anna
 </section>
 <section id="a-rule-example" class="slide level2 compact">
 <h2>A rule example</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a href=""></a><span class="co"># .claude/rules/replication-protocol.md</span></span>
-<span id="cb4-2"><a href=""></a><span class="pp">---</span></span>
-<span id="cb4-3"><a href=""></a><span class="fu">paths</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"scripts/**/*.R"</span><span class="kw">,</span><span class="at"> </span><span class="st">"scripts/**/*.do"</span><span class="kw">,</span><span class="at"> </span><span class="st">"scripts/**/*.py"</span><span class="kw">]</span></span>
-<span id="cb4-4"><a href=""></a><span class="pp">---</span></span>
-<span id="cb4-5"><a href=""></a></span>
-<span id="cb4-6"><a href=""></a><span class="co"># Replication-First R Code</span></span>
-<span id="cb4-7"><a href=""></a></span>
-<span id="cb4-8"><a href=""></a><span class="fu">When asked to extend an analysis</span><span class="kw">:</span></span>
-<span id="cb4-9"><a href=""></a><span class="fu">1. FIRST</span><span class="kw">:</span><span class="at"> replicate the original numbers in the manuscript.</span></span>
-<span id="cb4-10"><a href=""></a><span class="fu">2. THEN</span><span class="kw">:</span><span class="at"> extend.</span></span>
-<span id="cb4-11"><a href=""></a><span class="fu">3. NEVER</span><span class="kw">:</span><span class="at"> ship a script that produces numbers that don't match the paper.</span></span>
-<span id="cb4-12"><a href=""></a></span>
-<span id="cb4-13"><a href=""></a><span class="at">If the original numbers don't replicate, STOP and assess whether you are doing something wrong. If you cannot reproduce the results, report what differs.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href=""></a><span class="co"># .claude/rules/replication-protocol.md</span></span>
+<span id="cb5-2"><a href=""></a><span class="pp">---</span></span>
+<span id="cb5-3"><a href=""></a><span class="fu">paths</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"scripts/**/*.R"</span><span class="kw">,</span><span class="at"> </span><span class="st">"scripts/**/*.do"</span><span class="kw">,</span><span class="at"> </span><span class="st">"scripts/**/*.py"</span><span class="kw">]</span></span>
+<span id="cb5-4"><a href=""></a><span class="pp">---</span></span>
+<span id="cb5-5"><a href=""></a></span>
+<span id="cb5-6"><a href=""></a><span class="co"># Replication-First R Code</span></span>
+<span id="cb5-7"><a href=""></a></span>
+<span id="cb5-8"><a href=""></a><span class="fu">When asked to extend an analysis</span><span class="kw">:</span></span>
+<span id="cb5-9"><a href=""></a><span class="fu">1. FIRST</span><span class="kw">:</span><span class="at"> replicate the original numbers in the manuscript.</span></span>
+<span id="cb5-10"><a href=""></a><span class="fu">2. THEN</span><span class="kw">:</span><span class="at"> extend.</span></span>
+<span id="cb5-11"><a href=""></a><span class="fu">3. NEVER</span><span class="kw">:</span><span class="at"> ship a script that produces numbers that don't match the paper.</span></span>
+<span id="cb5-12"><a href=""></a></span>
+<span id="cb5-13"><a href=""></a><span class="at">If the original numbers don't replicate, STOP and assess whether you are doing something wrong. If you cannot reproduce the results, report what differs.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>This rule auto-loads when Claude opens any <code>.R</code> / <code>.do</code> / <code>.py</code> file. <br> Outside that scope, the rule isn’t in context — staying lean.</p>
 </section>
 <section id="hooks-deterministic-enforcement" class="slide level2 compact">
@@ -758,12 +806,12 @@ Pedro H. C. Sant’Anna
 </section>
 <section id="a-hook-example" class="slide level2 compact">
 <h2>A hook example</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="co"># .claude/hooks/log-reminder.py — Stop hook</span></span>
-<span id="cb5-2"><a href=""></a><span class="co"># Fires when Claude is about to stop responding.</span></span>
-<span id="cb5-3"><a href=""></a><span class="co"># If session log hasn't been updated in N responses, remind to update it.</span></span>
-<span id="cb5-4"><a href=""></a></span>
-<span id="cb5-5"><a href=""></a><span class="cf">if</span> responses_since_last_log_update <span class="op">&gt;</span> <span class="dv">50</span>:</span>
-<span id="cb5-6"><a href=""></a>    <span class="bu">print</span>(<span class="st">"Session log is stale. Update quality_reports/session_logs/"</span>, <span class="bu">file</span><span class="op">=</span>sys.stderr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a><span class="co"># .claude/hooks/log-reminder.py — Stop hook</span></span>
+<span id="cb6-2"><a href=""></a><span class="co"># Fires when Claude is about to stop responding.</span></span>
+<span id="cb6-3"><a href=""></a><span class="co"># If session log hasn't been updated in N responses, remind to update it.</span></span>
+<span id="cb6-4"><a href=""></a></span>
+<span id="cb6-5"><a href=""></a><span class="cf">if</span> responses_since_last_log_update <span class="op">&gt;</span> <span class="dv">50</span>:</span>
+<span id="cb6-6"><a href=""></a>    <span class="bu">print</span>(<span class="st">"Session log is stale. Update quality_reports/session_logs/"</span>, <span class="bu">file</span><span class="op">=</span>sys.stderr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>This isn’t AI judgment — it’s a Python script. Deterministic. Runs every Stop, no exceptions.</p>
 </section>
 <section id="whats-coming-next" class="slide level2 compact">
@@ -969,20 +1017,20 @@ Pedro H. C. Sant’Anna
 </section>
 <section id="anatomy-of-a-skill" class="slide level2 compact">
 <h2>Anatomy of a skill</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb6-1"><a href=""></a><span class="pp">---</span></span>
-<span id="cb6-2"><a href=""></a><span class="fu">name</span><span class="kw">:</span><span class="at"> my-skill-name</span></span>
-<span id="cb6-3"><a href=""></a><span class="fu">description</span><span class="kw">:</span><span class="at"> What it does + trigger phrases. "Use when user says X, Y, Z."</span></span>
-<span id="cb6-4"><a href=""></a><span class="fu">allowed-tools</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"Read"</span><span class="kw">,</span><span class="at"> </span><span class="st">"Write"</span><span class="kw">,</span><span class="at"> </span><span class="st">"Bash"</span><span class="kw">]</span></span>
-<span id="cb6-5"><a href=""></a><span class="pp">---</span></span>
-<span id="cb6-6"><a href=""></a></span>
-<span id="cb6-7"><a href=""></a><span class="co"># My Skill Name</span></span>
-<span id="cb6-8"><a href=""></a></span>
-<span id="cb6-9"><a href=""></a><span class="co">## Workflow</span></span>
-<span id="cb6-10"><a href=""></a></span>
-<span id="cb6-11"><a href=""></a><span class="co">### Phase 1 — Read inputs (refuse if invalid)</span></span>
-<span id="cb6-12"><a href=""></a><span class="co">### Phase 2 — Generate (annotate MUST / SHOULD / MAY)</span></span>
-<span id="cb6-13"><a href=""></a><span class="co">### Phase 3 — Verify (cross-check domain rules)</span></span>
-<span id="cb6-14"><a href=""></a><span class="co">### Phase 4 — Output (write to disk; report)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><a href=""></a><span class="pp">---</span></span>
+<span id="cb7-2"><a href=""></a><span class="fu">name</span><span class="kw">:</span><span class="at"> my-skill-name</span></span>
+<span id="cb7-3"><a href=""></a><span class="fu">description</span><span class="kw">:</span><span class="at"> What it does + trigger phrases. "Use when user says X, Y, Z."</span></span>
+<span id="cb7-4"><a href=""></a><span class="fu">allowed-tools</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"Read"</span><span class="kw">,</span><span class="at"> </span><span class="st">"Write"</span><span class="kw">,</span><span class="at"> </span><span class="st">"Bash"</span><span class="kw">]</span></span>
+<span id="cb7-5"><a href=""></a><span class="pp">---</span></span>
+<span id="cb7-6"><a href=""></a></span>
+<span id="cb7-7"><a href=""></a><span class="co"># My Skill Name</span></span>
+<span id="cb7-8"><a href=""></a></span>
+<span id="cb7-9"><a href=""></a><span class="co">## Workflow</span></span>
+<span id="cb7-10"><a href=""></a></span>
+<span id="cb7-11"><a href=""></a><span class="co">### Phase 1 — Read inputs (refuse if invalid)</span></span>
+<span id="cb7-12"><a href=""></a><span class="co">### Phase 2 — Generate (annotate MUST / SHOULD / MAY)</span></span>
+<span id="cb7-13"><a href=""></a><span class="co">### Phase 3 — Verify (cross-check domain rules)</span></span>
+<span id="cb7-14"><a href=""></a><span class="co">### Phase 4 — Output (write to disk; report)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>That’s a real skill template. <strong>Frontmatter ≤ 4 fields. Body = numbered phases.</strong> Other fields (<code>argument-hint</code>, <code>disable-model-invocation</code>) are optional polish — not required.</p>
 </section>
 <section id="why-this-beats-writing-the-workflow-into-your-prompts" class="slide level2 compact">
@@ -1559,16 +1607,16 @@ clean.rds      ──by──&gt; scripts/R/02_clean.R
 </section>
 <section id="the-cross-artifact-finding" class="slide level2 compact">
 <h2>The cross-artifact finding</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href=""></a><span class="fu">## Cross-Artifact Findings</span></span>
-<span id="cb9-2"><a href=""></a></span>
-<span id="cb9-3"><a href=""></a>**Scripts reviewed:** 3</span>
-<span id="cb9-4"><a href=""></a>**Reproducibility:** FAIL — 1 of 4 numeric claims diverges from script output</span>
-<span id="cb9-5"><a href=""></a>**Code quality:** 0 critical, 2 major, 5 minor</span>
-<span id="cb9-6"><a href=""></a></span>
-<span id="cb9-7"><a href=""></a><span class="fu">### Critical cross-artifact issues</span></span>
-<span id="cb9-8"><a href=""></a><span class="ss">- </span>Paper: Table 2, N = 14,562</span>
-<span id="cb9-9"><a href=""></a>  Code:  scripts/R/03_analyze.R:18 → N = 14,489</span>
-<span id="cb9-10"><a href=""></a>  Issue: silent <span class="in">`year &lt; 2020`</span> filter drops 73 obs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href=""></a><span class="fu">## Cross-Artifact Findings</span></span>
+<span id="cb10-2"><a href=""></a></span>
+<span id="cb10-3"><a href=""></a>**Scripts reviewed:** 3</span>
+<span id="cb10-4"><a href=""></a>**Reproducibility:** FAIL — 1 of 4 numeric claims diverges from script output</span>
+<span id="cb10-5"><a href=""></a>**Code quality:** 0 critical, 2 major, 5 minor</span>
+<span id="cb10-6"><a href=""></a></span>
+<span id="cb10-7"><a href=""></a><span class="fu">### Critical cross-artifact issues</span></span>
+<span id="cb10-8"><a href=""></a><span class="ss">- </span>Paper: Table 2, N = 14,562</span>
+<span id="cb10-9"><a href=""></a>  Code:  scripts/R/03_analyze.R:18 → N = 14,489</span>
+<span id="cb10-10"><a href=""></a>  Issue: silent <span class="in">`year &lt; 2020`</span> filter drops 73 obs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>This block goes at the <strong>top of the review report</strong>. The paper-side findings come after — because if the numbers don’t reproduce, paper-side polish is moot.</p>
 </section></section>
 <section>
@@ -1646,14 +1694,14 @@ clean.rds      ──by──&gt; scripts/R/02_clean.R
 </section>
 <section id="the-4-numerical-claims-preview" class="slide level2 compact">
 <h2>The 4 numerical claims (preview)</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href=""></a><span class="fu"># Manuscript Claims to Audit</span></span>
-<span id="cb11-2"><a href=""></a></span>
-<span id="cb11-3"><a href=""></a><span class="pp">|</span> ID <span class="pp">|</span> Claim <span class="pp">|</span> Source <span class="pp">|</span></span>
-<span id="cb11-4"><a href=""></a><span class="pp">|----|-------|--------|</span></span>
-<span id="cb11-5"><a href=""></a><span class="pp">|</span> C1 <span class="pp">|</span> ATT = 3.2 pp (SE 0.083) <span class="pp">|</span> Table 2, col (3) <span class="pp">|</span></span>
-<span id="cb11-6"><a href=""></a><span class="pp">|</span> C2 <span class="pp">|</span> N = 14,562 <span class="pp">|</span> Table 2, col (3) <span class="pp">|</span></span>
-<span id="cb11-7"><a href=""></a><span class="pp">|</span> C3 <span class="pp">|</span> R² = 0.31 <span class="pp">|</span> Table 2, col (3) <span class="pp">|</span></span>
-<span id="cb11-8"><a href=""></a><span class="pp">|</span> C4 <span class="pp">|</span> First-stage F-stat &gt; 25 <span class="pp">|</span> Section 4.2 narrative <span class="pp">|</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href=""></a><span class="fu"># Manuscript Claims to Audit</span></span>
+<span id="cb12-2"><a href=""></a></span>
+<span id="cb12-3"><a href=""></a><span class="pp">|</span> ID <span class="pp">|</span> Claim <span class="pp">|</span> Source <span class="pp">|</span></span>
+<span id="cb12-4"><a href=""></a><span class="pp">|----|-------|--------|</span></span>
+<span id="cb12-5"><a href=""></a><span class="pp">|</span> C1 <span class="pp">|</span> ATT = 3.2 pp (SE 0.083) <span class="pp">|</span> Table 2, col (3) <span class="pp">|</span></span>
+<span id="cb12-6"><a href=""></a><span class="pp">|</span> C2 <span class="pp">|</span> N = 14,562 <span class="pp">|</span> Table 2, col (3) <span class="pp">|</span></span>
+<span id="cb12-7"><a href=""></a><span class="pp">|</span> C3 <span class="pp">|</span> R² = 0.31 <span class="pp">|</span> Table 2, col (3) <span class="pp">|</span></span>
+<span id="cb12-8"><a href=""></a><span class="pp">|</span> C4 <span class="pp">|</span> First-stage F-stat &gt; 25 <span class="pp">|</span> Section 4.2 narrative <span class="pp">|</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="the-choreographed-time-budget" class="slide level2 compact">
 <h2>The choreographed time-budget</h2>
@@ -2260,10 +2308,10 @@ clean.rds      ──by──&gt; scripts/R/02_clean.R
 <section id="codex-plugin-setup-in-4-commands" class="slide level2 compact">
 <h2>Codex plugin: setup in 4 commands</h2>
 <p>In any Claude Code session inside VS Code:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href=""></a><span class="ex">/plugin</span> marketplace add openai/codex-plugin-cc  <span class="co"># one-time, account-wide</span></span>
-<span id="cb16-2"><a href=""></a><span class="ex">/plugin</span> install codex@openai-codex</span>
-<span id="cb16-3"><a href=""></a><span class="ex">/reload-plugins</span></span>
-<span id="cb16-4"><a href=""></a><span class="ex">/codex:setup</span>  <span class="co"># checks Codex CLI; offers install if missing</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href=""></a><span class="ex">/plugin</span> marketplace add openai/codex-plugin-cc  <span class="co"># one-time, account-wide</span></span>
+<span id="cb17-2"><a href=""></a><span class="ex">/plugin</span> install codex@openai-codex</span>
+<span id="cb17-3"><a href=""></a><span class="ex">/reload-plugins</span></span>
+<span id="cb17-4"><a href=""></a><span class="ex">/codex:setup</span>  <span class="co"># checks Codex CLI; offers install if missing</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>If <code>/codex:setup</code> says you need to authenticate: <code>!codex login</code> opens a browser for OAuth.</p>
 <p>Canonical source: <a href="https://github.com/openai/codex-plugin-cc"><code>openai/codex-plugin-cc</code></a> · Walkthrough: <code>handouts/codex-setup.md</code>.</p>
 </section>

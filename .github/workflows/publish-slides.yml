@@ -43,6 +43,11 @@ jobs:
         working-directory: Quarto
         run: quarto render claude-mini.qmd
 
+      - name: Render handouts
+        run: |
+          quarto render handouts/resources.md
+          quarto render handouts/codex-setup.md
+
       - name: Stage site
         run: |
           rsync -a \
@@ -53,13 +58,6 @@ jobs:
             --exclude='.claude' \
             --exclude='quality_reports' \
             ./ _site/
-          cat > _site/index.html <<'EOF'
-          <!doctype html>
-          <meta charset="utf-8">
-          <meta http-equiv="refresh" content="0; url=Quarto/claude-mini.html">
-          <title>Claude-Mini — Watch-Along Seminar</title>
-          <p><a href="Quarto/claude-mini.html">Open the slides &rarr;</a></p>
-          EOF
 
       - uses: actions/upload-pages-artifact@v3
         with:

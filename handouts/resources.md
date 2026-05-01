@@ -1,4 +1,15 @@
-# Resources — Watch-Along Take-Home
+---
+title: "Resources — Watch-Along Take-Home"
+subtitle: "Every external link from the talk, in one place"
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 2
+    fig-width: 8
+    code-overflow: wrap
+    css: ../Quarto/handouts.css
+---
 
 A consolidated list of every external link from the talk plus a few that didn't fit on slides. Print, save, or fork; the deck embeds these but this file is your reference card.
 
@@ -50,8 +61,17 @@ These are the source of truth. If a claim in the talk seemed surprising, check t
 
 - **[`chrisblattman/claudeblattman`](https://github.com/chrisblattman/claudeblattman)** — Chris Blattman's guide for non-technical academics. Less code-heavy, more workflow-heavy.
 - **[`scunning1975/MixtapeTools`](https://github.com/scunning1975/MixtapeTools)** — Scott Cunningham's TikZ + Rhetoric of Decks materials. **Source of our TikZ infrastructure.**
+- **[Andrej Karpathy — LLM Wiki (gist)](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f)** — Karpathy's pattern for a **persistent LLM-maintained markdown knowledge base**. Core insight: instead of RAG-style chunk retrieval (where the LLM rediscovers knowledge on every query), maintain durable wiki pages that *accumulate* over time. New sources get compiled into pages; cross-references update; answers cite the wiki. Pairs naturally with `/pdf-to-md` (convert sources first) and the `claude-code-my-workflow` template's research skills. **Open-source implementations:** [`lucasastorian/llmwiki`](https://github.com/lucasastorian/llmwiki), [`Astro-Han/karpathy-llm-wiki`](https://github.com/Astro-Han/karpathy-llm-wiki), [`kfchou/wiki-skills`](https://github.com/kfchou/wiki-skills) (Claude Code skills), [`NicholasSpisak/second-brain`](https://github.com/NicholasSpisak/second-brain) (Obsidian).
 - **[`karpathy/autoresearch`](https://github.com/karpathy/autoresearch)** — Andrej Karpathy's constraint-based autonomous-research experiment. Aspirational; different shape than ours.
 - **[`EveryInc/compound-engineering-plugin`](https://github.com/EveryInc/compound-engineering-plugin)** — Every Inc.'s "Compound Engineering" plugin (works in Claude Code, Codex, Cursor, Copilot). 36 skills + 51 agents organized around an `ideate → brainstorm → plan → work` loop. **A kindred-spirit project to our orchestrator pattern** — different framing, similar discipline. Worth browsing if you like ours.
+
+### Document preprocessing (PDF → markdown)
+
+Claude reads markdown 50–70% more efficiently than PDFs (token count + signal-to-noise). Convert at intake, feed Claude the `.md`. Both tools are referenced inline in Part 1's "How Claude reads input" slides.
+
+- **[`microsoft/markitdown`](https://github.com/microsoft/markitdown)** — Microsoft-maintained Swiss-army knife. Converts PDF, DOCX, XLSX, PPTX, HTML, EPUB, CSV, JSON, XML → markdown. Mature, Python CLI, one-line install. **First choice — covers ~90% of cases.** `pip install markitdown && markitdown paper.pdf > paper.md`.
+- **[`opendataloader-project/opendataloader-pdf`](https://github.com/opendataloader-project/opendataloader-pdf)** — PDF specialist. XY-cut++ reading order (handles multi-column papers correctly), bounding boxes per element (citation-ready for RAG), 0.907 benchmark accuracy (top open-source). **Use when MarkItDown chokes on a complex layout** — multi-column journal articles, dense tables, math-heavy PDFs.
+- **[`/pdf-to-md` skill in this repo](../.claude/skills/pdf-to-md/SKILL.md)** — wraps both tools with a triage step that auto-falls-back from MarkItDown to OpenDataLoader-PDF when the first pass looks suspect.
 
 ### Applied curriculum + tutorials
 

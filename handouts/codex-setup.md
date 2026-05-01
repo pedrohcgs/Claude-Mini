@@ -1,4 +1,15 @@
-# Codex Adversarial Review — Setup Handout
+---
+title: "Codex Adversarial Review — Setup Handout"
+subtitle: "A second tool reading the diff your first tool just produced"
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 2
+    fig-width: 8
+    code-overflow: wrap
+    css: ../Quarto/handouts.css
+---
 
 A second tool reading the diff your first tool just produced. Catches things one tool's confirmation bias misses.
 

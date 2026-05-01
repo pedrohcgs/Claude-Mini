@@ -263,6 +263,39 @@ When "Claude is supposed to" must become "this thing actually happens."
 
 The next four parts walk through these. Today's talk in one sentence: **a workflow is the pattern that connects them.**
 
+# How Claude reads input {.claudeorange}
+
+## Markdown is Claude's native format {.compact}
+
+Claude's training corpus is **dense in markdown** — documentation, GitHub, Stack Overflow, technical blogs. Claude reads headers, code blocks, lists, and tables natively.
+
+What this means in practice:
+
+- ✅ **Markdown:** highest signal-to-noise. Claude reads it the way you read it.
+- 🟡 **PDF (via vision):** works, but you pay 2–3× the tokens for layout artifacts (page breaks, fonts, columns) that don't carry meaning.
+- 🟡 **DOCX / PPTX:** XML noise. Convert first.
+- 🔴 **Scanned-only PDF:** OCR layer is extra dependency; accuracy drops.
+
+> **Rule of thumb:** PDF → markdown saves **50–70%** of tokens. Same content, less noise.
+
+## Convert PDFs first — two tools {.compact}
+
+::: {.wide-table}
+
+| Tool | Strength | Use when |
+|------|----------|----------|
+| [`microsoft/markitdown`](https://github.com/microsoft/markitdown) | Swiss-army knife: PDF, DOCX, XLSX, PPTX, HTML, EPUB. One-line CLI. | First choice — covers ~90% of cases. |
+| [`opendataloader-pdf`](https://github.com/opendataloader-project/opendataloader-pdf) | PDF specialist. XY-cut++ reading order, bounding boxes, 0.907 benchmark accuracy. | Multi-column papers, dense tables, math-heavy PDFs. |
+
+:::
+
+```bash
+markitdown paper.pdf > paper.md           # 90% of cases
+opendataloader paper.pdf -o paper.md      # complex layouts
+```
+
+**Workflow:** convert PDFs as soon as they enter the project. Feed Claude the `.md`; let the original sit in `master_supporting_docs/`. There's a `/pdf-to-md` skill in this repo that wraps both tools.
+
 # CLAUDE.md as control center {.claudeorange}
 
 ## A very important file in this stack {.compact}

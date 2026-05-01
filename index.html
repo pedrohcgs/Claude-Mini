@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Claude-Mini · Agentic AI for Academic Research</title>
+  <meta name="description" content="A 4-hour watch-along seminar on agentic AI for academic research, by Pedro H. C. Sant'Anna.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Match Quarto/claude-mini.scss exactly */
+      --emory-blue: #012169;
+      --emory-blue-deep: #00143f;
+      --emory-blue-light: #E8EDF5;
+      --emory-gold: #B9975B;
+      --emory-yellow: #F2A900;
+      --claude-orange: #cc785c;
+      --jet: #1a1a1a;
+      --muted: #555555;
+      --muted-2: #777777;
+      --bg: #ffffff;
+      --border: rgba(1, 33, 105, 0.08);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Source Sans Pro", "Helvetica Neue", -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--jet);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      font-weight: 300;
+    }
+    a:focus-visible {
+      outline: 3px solid var(--emory-yellow);
+      outline-offset: 2px;
+      border-radius: 3px;
+    }
+
+    /* ==== HERO — mirrors the deck's title slide ==== */
+    .hero {
+      background: linear-gradient(180deg, white 0%, var(--emory-blue-light) 100%);
+      padding: 5.5rem 2rem 5rem;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 1.5rem; left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: var(--emory-gold);
+      border-radius: 2px;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        var(--emory-gold) 30%,
+        var(--claude-orange) 70%,
+        transparent 100%);
+    }
+    .hero-inner {
+      max-width: 920px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .hero .eyebrow {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--emory-gold);
+      margin: 0 0 1.4rem;
+    }
+    .hero h1 {
+      color: var(--emory-blue);
+      font-size: clamp(2.4rem, 6vw, 3.8rem);
+      font-weight: 700;
+      margin: 0 0 0.4rem;
+      letter-spacing: -0.025em;
+      line-height: 1.05;
+    }
+    .hero .subtitle {
+      color: var(--emory-gold);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+      margin: 0 0 2.2rem;
+    }
+    .hero .meta {
+      color: var(--muted);
+      font-size: 1rem;
+      margin: 0;
+    }
+    .hero .meta strong {
+      color: var(--emory-blue);
+      font-weight: 600;
+    }
+    .hero .meta a {
+      color: var(--emory-blue);
+      text-decoration: none;
+      border-bottom: 1px dotted var(--emory-gold);
+      transition: border-color 0.2s ease;
+    }
+    .hero .meta a:hover { border-bottom-color: var(--emory-blue); border-bottom-style: solid; }
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 2rem;
+      padding: 0.7rem 1.4rem;
+      background: var(--emory-blue);
+      color: white !important;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      border: 0 !important;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+      box-shadow: 0 2px 8px rgba(1, 33, 105, 0.15);
+    }
+    .hero-cta:hover {
+      background: var(--emory-blue-deep);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(1, 33, 105, 0.25);
+    }
+    .hero-cta svg { width: 16px; height: 16px; }
+
+    /* ==== STATS STRIP ==== */
+    .stats {
+      max-width: 920px;
+      margin: -2.5rem auto 0;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 2;
+    }
+    .stats-grid {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      box-shadow: 0 4px 16px rgba(1, 33, 105, 0.06);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      overflow: hidden;
+    }
+    .stat {
+      padding: 1.4rem 1rem;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+    .stat:last-child { border-right: 0; }
+    .stat .num {
+      display: block;
+      color: var(--emory-blue);
+      font-size: 1.9rem;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .stat .lbl {
+      display: block;
+      margin-top: 0.35rem;
+      color: var(--muted);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+    }
+    @media (max-width: 540px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat:nth-child(2) { border-right: 0; }
+      .stat:nth-child(1), .stat:nth-child(2) { border-bottom: 1px solid var(--border); }
+    }
+
+    /* ==== MAIN ==== */
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 4rem 2rem 5rem;
+    }
+    section { margin-bottom: 4rem; }
+    section:last-child { margin-bottom: 0; }
+    h2 {
+      color: var(--emory-blue);
+      font-size: 1.65rem;
+      font-weight: 600;
+      margin: 0 0 1.5rem;
+      padding-bottom: 0.3rem;
+      letter-spacing: -0.01em;
+      border-bottom: 2px solid rgba(185, 151, 91, 0.3);
+    }
+    h3 {
+      color: var(--emory-gold);
+      font-style: italic;
+      font-weight: 500;
+      font-size: 1.05rem;
+      margin: 1.5rem 0 0.5rem;
+    }
+    p { font-weight: 300; }
+
+    /* ==== CARDS — mirrors deck's softbox aesthetic ==== */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+    .card {
+      background: linear-gradient(135deg, white 0%, rgba(232,237,245,0.5) 100%);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.6rem 1.5rem;
+      text-decoration: none;
+      color: var(--jet);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+      display: block;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--emory-blue);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(1, 33, 105, 0.10);
+      border-color: rgba(1, 33, 105, 0.2);
+    }
+    .card:hover::before { opacity: 1; }
+    .card.external {
+      background: linear-gradient(135deg, white 0%, rgba(204, 120, 92, 0.06) 100%);
+    }
+    .card.external::before { background: var(--claude-orange); }
+    .card.external:hover { border-color: rgba(204, 120, 92, 0.3); }
+    .card .label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--claude-orange);
+      font-weight: 700;
+      margin-bottom: 0.55rem;
+    }
+    .card.external .label { color: var(--emory-gold); }
+    .card h3 {
+      margin: 0 0 0.5rem;
+      color: var(--emory-blue);
+      font-size: 1.18rem;
+      font-weight: 600;
+      font-style: normal;
+      letter-spacing: -0.01em;
+    }
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+    .card.external h3::after {
+      content: " ↗";
+      font-size: 0.85em;
+      color: var(--claude-orange);
+      font-weight: 400;
+    }
+
+    /* ==== ABOUT — mirrors deck's softbox ==== */
+    .about {
+      background: linear-gradient(135deg, rgba(185, 151, 91, 0.04) 0%, rgba(185, 151, 91, 0.10) 100%);
+      border-left: 4px solid var(--emory-gold);
+      padding: 1.75rem 2rem;
+      border-radius: 0 8px 8px 0;
+    }
+    .about p {
+      margin: 0 0 0.9rem;
+      color: var(--jet);
+      font-weight: 300;
+      line-height: 1.65;
+    }
+    .about p:last-child { margin-bottom: 0; }
+    .about strong { color: var(--emory-blue); font-weight: 600; }
+    .about a {
+      color: var(--emory-blue);
+      text-decoration: none;
+      border-bottom: 1px dotted var(--emory-gold);
+    }
+    .about a:hover { border-bottom-style: solid; }
+    .pill {
+      display: inline-block;
+      background: rgba(204, 120, 92, 0.12);
+      color: var(--claude-orange);
+      padding: 0.15em 0.65em;
+      border-radius: 12px;
+      font-size: 0.82em;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+    code {
+      font-family: "JetBrains Mono", monospace;
+      background: rgba(1, 33, 105, 0.06);
+      color: var(--emory-blue);
+      padding: 0.1em 0.4em;
+      border-radius: 3px;
+      font-size: 0.88em;
+      font-weight: 500;
+    }
+
+    /* ==== ROADMAP ==== */
+    .roadmap {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(1, 33, 105, 0.04);
+    }
+    .roadmap table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+    .roadmap th {
+      background: var(--emory-blue);
+      color: white;
+      text-align: left;
+      padding: 0.85rem 1.25rem;
+      font-weight: 600;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .roadmap td {
+      padding: 0.85rem 1.25rem;
+      border-top: 1px solid var(--border);
+      vertical-align: middle;
+      font-weight: 400;
+    }
+    .roadmap td:first-child {
+      font-weight: 700;
+      color: var(--emory-blue);
+      width: 4rem;
+    }
+    .roadmap td:nth-child(3) {
+      color: var(--muted-2);
+      font-variant-numeric: tabular-nums;
+      width: 6rem;
+      font-size: 0.9rem;
+    }
+    .roadmap td:nth-child(4) { width: 9.5rem; }
+    .roadmap tr:hover td { background: rgba(232, 237, 245, 0.5); }
+    .roadmap .demo-pill {
+      display: inline-block;
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 0.18rem 0.6rem;
+      border-radius: 4px;
+      background: rgba(204, 120, 92, 0.12);
+      color: var(--claude-orange);
+      letter-spacing: 0.02em;
+    }
+    .roadmap .demo-none {
+      color: var(--muted-2);
+      font-size: 0.88rem;
+      font-style: italic;
+    }
+
+    /* ==== FOOTER ==== */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 2rem 3rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.92rem;
+      background: linear-gradient(180deg, white 0%, rgba(232, 237, 245, 0.4) 100%);
+      font-weight: 400;
+    }
+    footer a {
+      color: var(--emory-blue);
+      text-decoration: none;
+      border-bottom: 1px dotted var(--emory-gold);
+      font-weight: 600;
+    }
+    footer a:hover { border-bottom-style: solid; }
+    footer p { margin: 0.4rem 0; }
+    footer .footer-meta { font-size: 0.85rem; color: var(--muted-2); margin-top: 0.8rem; }
+
+    @media (max-width: 540px) {
+      .hero { padding: 4rem 1.5rem 4rem; }
+      main { padding: 3rem 1.5rem 4rem; }
+      .stats { padding: 0 1.5rem; }
+      h2 { font-size: 1.35rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow">Watch-Along Seminar · Spring 2026</span>
+    <h1>Claude-Mini</h1>
+    <p class="subtitle">Agentic AI for Academic Research</p>
+    <p class="meta">
+      <strong>Pedro H. C. Sant&rsquo;Anna</strong> · Emory University
+    </p>
+    <a class="hero-cta" href="Quarto/claude-mini.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+        <polygon points="5 3 19 12 5 21 5 3" fill="currentColor"></polygon>
+      </svg>
+      Open the slides
+    </a>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="stats-grid">
+    <div class="stat"><span class="num">4</span><span class="lbl">Hours</span></div>
+    <div class="stat"><span class="num">7</span><span class="lbl">Parts</span></div>
+    <div class="stat"><span class="num">6</span><span class="lbl">Demos</span></div>
+    <div class="stat"><span class="num">3</span><span class="lbl">Headliners</span></div>
+  </div>
+</div>
+
+<main>
+
+  <section>
+    <h2>Materials</h2>
+    <div class="cards">
+      <a class="card" href="Quarto/claude-mini.html">
+        <div class="label">Slides</div>
+        <h3>The 4-hour deck</h3>
+        <p>Watch-along Quarto RevealJS deck covering CLAUDE.md, skills, hooks, orchestration, replication, and peer review.</p>
+      </a>
+      <a class="card" href="handouts/resources.html">
+        <div class="label">Handout</div>
+        <h3>Resources</h3>
+        <p>Every external link from the talk in one printable take-home reference card.</p>
+      </a>
+      <a class="card" href="handouts/codex-setup.html">
+        <div class="label">Handout</div>
+        <h3>Codex setup</h3>
+        <p>Adversarial review setup: install the Codex plugin and run a second-tool review of your work.</p>
+      </a>
+      <a class="card external" href="https://psantanna.com/claude-code-my-workflow/">
+        <div class="label">Reference</div>
+        <h3>Full workflow guide</h3>
+        <p>The maintained reference template: <code>claude-code-my-workflow</code>. Full walkthrough of skills, agents, hooks, and rules.</p>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <h2>About</h2>
+    <div class="about">
+      <p>Claude-Mini is a <strong>teaching distillation</strong> of <a href="https://github.com/pedrohcgs/claude-code-my-workflow"><code>claude-code-my-workflow</code></a>. It bundles a <span class="pill">starter kit</span> of <strong>16 skills, 10 agents, 10 rules, 2 hooks</strong> &mdash; adapted for general academic use &mdash; alongside a 4-hour walk-through and 6 pre-staged demo bundles.</p>
+      <p>Audience: academic researchers in applied empirical fields. Format: watch-along &mdash; the speaker demonstrates live; the audience observes. No participant install required to follow.</p>
+      <p><strong>This repo is a snapshot, not a maintained mirror.</strong> Bug fixes and new skills land in the parent template first. Treat Claude-Mini as a launching pad; fork the parent for active work.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Roadmap</h2>
+    <div class="roadmap">
+      <table>
+        <thead>
+          <tr><th>Part</th><th>Topic</th><th>Time</th><th>Live demo</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Agentic AI + the <code>CLAUDE.md</code> control center</td><td>40 min</td><td><span class="demo-none">Micro-interaction</span></td></tr>
+          <tr><td>2</td><td>End-to-end demo: improve a manuscript section</td><td>30 min</td><td><span class="demo-pill">Headliner #1</span></td></tr>
+          <tr><td>3</td><td>Building reusable skills (paper exercise)</td><td>30 min</td><td><span class="demo-none">Walk-through</span></td></tr>
+          <tr><td>4</td><td>Orchestration + multi-agent systems</td><td>25 min</td><td><span class="demo-none">Mini-demo</span></td></tr>
+          <tr><td>5</td><td>Research + replication</td><td>45 min</td><td><span class="demo-pill">Headliner #2</span></td></tr>
+          <tr><td>6</td><td>Writing, refereeing, review simulation</td><td>45 min</td><td><span class="demo-pill">Headliner #3</span></td></tr>
+          <tr><td>7</td><td>Closing + cross-tool strategies</td><td>25 min</td><td><span class="demo-none">&mdash;</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>
+    <a href="https://github.com/pedrohcgs/Claude-Mini">GitHub</a> ·
+    <a href="https://psantanna.com">psantanna.com</a> ·
+    <a href="mailto:pedro.santanna@emory.edu">Email</a>
+  </p>
+  <p class="footer-meta">MIT License. Built on top of <a href="https://github.com/pedrohcgs/claude-code-my-workflow"><code>claude-code-my-workflow</code></a>.</p>
+</footer>
+
+</body>
+</html>

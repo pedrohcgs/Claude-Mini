@@ -1,0 +1,83 @@
+/* Handouts shared theme — Emory blue + Anthropic accent
+   Used by handouts/resources.md and handouts/codex-setup.md. */
+
+:root {
+  --emory-blue: #002B7F;
+  --emory-gold: #B9975B;
+  --claude-orange: #cc785c;
+}
+
+h1.title {
+  color: var(--emory-blue);
+  border-bottom: 3px solid var(--emory-gold);
+  padding-bottom: 0.4em;
+}
+
+h1, h2, h3 {
+  color: var(--emory-blue);
+}
+
+h2 {
+  margin-top: 2em;
+  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 0.2em;
+}
+
+a {
+  color: var(--claude-orange);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+blockquote {
+  border-left: 4px solid var(--emory-gold);
+  background: #fdf8ee;
+  padding: 0.5em 1em;
+  margin: 1em 0;
+}
+
+code {
+  background: #f4f4f4;
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+}
+
+pre {
+  background: #f8f8f8;
+  border-left: 3px solid var(--emory-blue);
+  padding: 0.8em 1em;
+  border-radius: 0 3px 3px 0;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 1em 0;
+}
+
+table th {
+  background: var(--emory-blue);
+  color: white;
+  padding: 0.5em 1em;
+  text-align: left;
+}
+
+table td {
+  padding: 0.5em 1em;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+/* Back-to-landing link */
+.handout-back {
+  display: inline-block;
+  margin-bottom: 1.5em;
+  color: var(--emory-blue);
+  font-size: 0.9em;
+}
