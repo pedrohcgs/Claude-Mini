@@ -191,7 +191,6 @@ If ANY of these fail, the verdict is **REJECTED**:
 
 You MAY invoke these specialized agents for deeper scrutiny:
 - **slide-auditor** — detailed overflow/spacing analysis on specific slides
-- **tikz-reviewer** — TikZ diagram quality (if SVGs look wrong)
 - **pedagogy-reviewer** — narrative flow concerns (if structure feels off)
 - **proofreader** — grammar/typo issues discovered during review
 

@@ -1,21 +1,36 @@
-# Demo Skills
+# Skills
 
-This directory contains a curated subset of the skills used during the watch-along seminar's live demos. The **full set (30 skills) lives in [`claude-code-my-workflow`](https://github.com/pedrohcgs/claude-code-my-workflow) v1.8.0+**.
+A starter kit of general-purpose skills for academic researchers. Imported from [`claude-code-my-workflow`](https://github.com/pedrohcgs/claude-code-my-workflow), the maintained reference template.
 
-## Why curate?
+## What's here
 
-Faculty seeing 30 skills in a directory feels overwhelming and unfocused. Claude-Mini's `.claude/skills/` shows only what we actually invoke during the talk — typically 4-5 skills:
+| Skill | What it does |
+|---|---|
+| `/audit-reproducibility` | Cross-check numerical claims in a manuscript against actual R/Stata/Python outputs |
+| `/checkpoint` | Save a structured state snapshot before stopping or handing off |
+| `/commit` | Stage, commit, push, open a PR, and merge to main with quality gates |
+| `/deep-audit` | Multi-pass review combining structure, content, and code |
+| `/devils-advocate` | Adversarial 5–7 question challenge to a deck or argument |
+| `/lit-review` | Structured literature search + synthesis with BibTeX-ready citations |
+| `/pedagogy-review` | Pedagogical review of slide decks |
+| `/preregister` | Draft an OSF / AsPredicted / AEA RCT preregistration |
+| `/proofread` | Read-only proofreading pass over `.tex` or `.qmd` files |
+| `/qa-quarto` | Quality-check Quarto slides (overflow, parity, content) |
+| `/respond-to-referees` | Generate a structured response-to-referees document |
+| `/review-paper` | Comprehensive manuscript review (single-pass, adversarial, or simulated peer-review) |
+| `/slide-excellence` | Combined visual + pedagogical + proofreading review of slides |
+| `/validate-bib` | Validate bibliography entries against citations |
+| `/verify-claims` | Chain-of-Verification fact-checking on a draft |
+| `/visual-audit` | Visual layout audit of slides |
 
-- `/preregister` — Part 3 walkthrough subject.
-- `/checkpoint` — referenced briefly in Part 4 (session handoff discipline).
-- (Others added as Demo materials are finalized in Week 2.)
+## Source of truth
 
-If a participant clones Claude-Mini and tries to invoke `/review-paper` or `/audit-reproducibility`, those skills are NOT in this repo — they need to clone `claude-code-my-workflow` for the production set.
+The canonical home of these skills is [`claude-code-my-workflow`](https://github.com/pedrohcgs/claude-code-my-workflow). When that repo ships a new version of a skill, this one falls behind.
 
-## Why not just point at the parent repo?
+**This repo is a snapshot, not a maintained mirror.** Treat it as a starter kit. For active work, fork the parent template — it's the version that gets bug fixes and new skills.
 
-The talk demonstrates a flow where Pedro's editor is open in Claude-Mini's directory. For the demo to "see" `/preregister`, the skill must live in `Claude-Mini/.claude/skills/preregister/`. So we copy. Each copied skill includes an attribution footer pointing at the canonical source in `claude-code-my-workflow`.
+## Why a snapshot is fine
 
-## Maintenance
-
-When `claude-code-my-workflow` ships a new version of a skill we use here, copy the updated SKILL.md into the corresponding directory under this `.claude/skills/`. Don't pull during the week of the talk — pin to a known-good version.
+- Audience members can clone Claude-Mini, see a working set of skills, and start experimenting without first cloning the parent.
+- Skills are mostly stable; the patterns generalize. A six-month-old version of `/respond-to-referees` is still useful.
+- Nothing here is wired to Pedro's specific papers or courses — references that were too project-specific have been adapted for general academic use.

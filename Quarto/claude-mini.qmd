@@ -1708,6 +1708,16 @@ That's the smallest experiment I'd recommend. Once it exists, everything else in
 
 (If you want the slides and demos: clone [`Claude-Mini`](https://github.com/pedrohcgs/Claude-Mini). Full template: fork [`claude-code-my-workflow`](https://github.com/pedrohcgs/claude-code-my-workflow). But neither of those changes a paper by itself.)
 
+## Claude-Mini's `.claude/` is a starter kit {.compact}
+
+This repo ships a curated set: **16 skills, 10 agents, 10 rules, 2 hooks** — adapted for general academic use.
+
+All of it is imported from [`claude-code-my-workflow`](https://github.com/pedrohcgs/claude-code-my-workflow), which is the **maintained reference template**.
+
+> **Claude-Mini is a snapshot, not a mirror.** Bug fixes and new skills land in the parent first. Don't expect this repo to track them in real time.
+
+**Practical advice:** clone Claude-Mini to learn the patterns; fork `claude-code-my-workflow` once you're ready to use this seriously.
+
 ## When you're ready, three places to extend {.compact}
 
 When the CLAUDE.md habit is in place — these are next, in priority order:

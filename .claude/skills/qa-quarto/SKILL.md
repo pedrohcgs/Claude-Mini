@@ -35,7 +35,7 @@ Compare Quarto HTML slides against their Beamer PDF benchmark using an iterative
 │ • Compare Beamer vs Quarto comprehensively                  │
 │ • Check hard gates (overflow, content parity, etc.)         │
 │ • Produce detailed report with actionable fixes             │
-│ • May delegate to sub-agents (slide-auditor, tikz-reviewer) │
+│ • May delegate to sub-agents (e.g. slide-auditor)           │
 └─────────────────────────────────────────────────────────────┘
                             │
                             ▼

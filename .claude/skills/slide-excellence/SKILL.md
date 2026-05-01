@@ -22,7 +22,7 @@ Resolve the full path:
 
 ### 2. Run Review Agents in Parallel
 
-Launch agents as Task subagents simultaneously. Always run the first three; add Agent 4 if the file contains TikZ diagrams.
+Launch all three agents as Task subagents simultaneously.
 
 **Agent 1: Visual Audit** (slide-auditor)
 - Check overflow, font consistency, box fatigue, spacing, images
@@ -37,25 +37,6 @@ Launch agents as Task subagents simultaneously. Always run the first three; add 
 **Agent 3: Proofreading** (proofreader)
 - Check grammar, typos, consistency, academic quality, citations
 - Save report to: `quality_reports/[FILENAME_WITHOUT_EXT]_report.md`
-
-**Agent 4: TikZ Review** (general-purpose, only if file contains `\begin{tikzpicture}` or references TikZ SVGs)
-- Follow the protocol in `.claude/agents/tikz-reviewer.md` and `.claude/rules/tikz-visual-quality.md`
-- Check label overlaps, geometric accuracy, visual semantics, aesthetic polish
-- **TikZ freshness check:** verify `extract_tikz.tex` matches current Beamer source (see `.claude/rules/single-source-of-truth.md`)
-- Save report to: `quality_reports/[FILENAME_WITHOUT_EXT]_tikz_review.md`
-
-**Agent 5: Environment & Content Parity** (general-purpose, only for `.qmd` files that have a corresponding `.tex`)
-- Compare Beamer frame count vs Quarto slide count
-- Verify every Beamer custom environment has a CSS equivalent used in the QMD
-- Check that plotly charts have height override CSS and proper color mappings
-- Report any content drift: slides in Beamer but not Quarto, or vice versa
-- Save report to: `quality_reports/[FILENAME_WITHOUT_EXT]_parity_report.md`
-
-**Agent 6: Substance Review** (general-purpose with econometric-reviewer protocol, always run for `.tex` files)
-- Follow the protocol in `.claude/agents/econometric-reviewer.md`
-- 5 lenses: Assumption Stress Test, Derivation Verification, Citation Fidelity, Code-Theory Alignment, Backward Logic Check
-- Also reads R scripts in `scripts/R/LectureNN_*.R` for code-theory alignment
-- Save report to: `quality_reports/[FILENAME_WITHOUT_EXT]_substance_review.md`
 
 ### 3. Synthesize Combined Summary
 

@@ -116,7 +116,7 @@ Standard LaTeX checks:
 - `\resizebox{}` needed on tables exceeding `\textwidth`
 - `\vspace{-Xem}` overuse (prefer structural changes like splitting slides)
 - `\footnotesize` or `\tiny` used unnecessarily (prefer splitting content)
-- Note: This course does NOT use `\pause` — see `.claude/rules/no-pause-beamer.md`
+- Note: Decks in this template do not use `\pause` — incremental reveal is handled via Quarto fragments instead
 
 ## Report Format
 
